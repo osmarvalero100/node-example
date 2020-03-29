@@ -1,6 +1,8 @@
 const express = require('express');
 const port = process.env.PORT || 3003;
 const app = express();
+app.use(express.json());
+const { check, validationResult } = require('express-validator');
 
 var coches = [
   {id: 0, company: 'BMW', model: 'X3', year: '2020'},
@@ -27,6 +29,24 @@ app.get('/api/cars/:company', (req, res) => {
   } else {
     res.send(coche);
   }
+});
+
+app.post('/api/cars', [
+  check('model').isLength({min: 3})
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array()});
+  }
+  var cartId = coches.length;
+  var coche = {
+    id: cartId,
+    company: req.body.company,
+    model: req.body.model,
+    year: req.body.year
+  };
+  coches.push(coche);
+  res.status(201).send(coche);
 });
 
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
