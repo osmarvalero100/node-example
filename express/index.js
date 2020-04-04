@@ -32,6 +32,7 @@ app.get('/api/cars/:company', (req, res) => {
 });
 
 app.post('/api/cars', [
+  check('company').isLength({min: 3}),
   check('model').isLength({min: 3})
 ], (req, res) => {
   const errors = validationResult(req);
@@ -47,6 +48,26 @@ app.post('/api/cars', [
   };
   coches.push(coche);
   res.status(201).send(coche);
+});
+
+app.put('/api/cars/:id', [
+  check('company').isLength({min: 3}),
+  check('model').isLength({min: 3})
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array()});
+  }
+
+  const coche = coches.find(coche => coche.id === parseInt(req.params.id));
+  if (!coche) {
+    return res.status(404).send(`El coche con id: ${req.params.id} no existe.`);
+  }
+  coche.company = req.body.company;
+  coche.model = req.body.model;
+  coche.year = req.body.year;
+
+  res.status(204).send();
 });
 
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
