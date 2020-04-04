@@ -70,4 +70,14 @@ app.put('/api/cars/:id', [
   res.status(204).send();
 });
 
+app.delete('/api/cars/:id', (req, res) => {
+  const coche = coches.find(coche => coche.id === parseInt(req.params.id));
+  if (!coche) {
+    return res.status(400).send(`El coche con id: ${req.params.id} no existe.`);
+  }
+  const index = coches.indexOf(coche);
+  coches.splice(index, 1);
+  return res.status(204).send();
+});
+
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
