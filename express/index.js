@@ -4,14 +4,12 @@ const app = express();
 const { check, validationResult } = require('express-validator');
 app.use(express.json());
 // Middleware
-app.use((req,res, next) => {
-  console.log('Time: ', Date.now());
-  // next() es necesario para continuar la ejecución
-  next();
-});
+const date = require('./date');
+app.use(date);
 // Este Middleware solo se ejecutal al usar este endpoint: '/api/cars/list'
 app.use('/api/cars/list', (req, res, next) => {
   console.log('Request Type: ', req.method);
+  // next() es necesario para continuar la ejecución
   next();
 });
 
