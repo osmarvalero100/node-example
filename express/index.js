@@ -1,9 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 const port = process.env.PORT || 3003;
 const app = express();
 const { check, validationResult } = require('express-validator');
 app.use(express.json());
 // Middleware
+app.use(morgan('tiny'));
 const date = require('./date');
 app.use(date);
 // Este Middleware solo se ejecutal al usar este endpoint: '/api/cars/list'
