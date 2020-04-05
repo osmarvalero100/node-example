@@ -28,9 +28,21 @@ function getModel(model) {
     }, 2000)
   })
 }
-
+/*
 const promesa = getCar(1)
 promesa
   .then(coche => getModel(coche.model))
   .then(model => console.log(model))
   .catch(err => console.log(err.message))
+*/
+async function showModel() {
+  try {
+    const car = await getCar(1)
+    const model = await getModel(car.model)
+    console.log(model)
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+showModel()
