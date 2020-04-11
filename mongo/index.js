@@ -24,7 +24,8 @@ const Car = mongoose.model('car', carSchema);
 //getFilterExtrasByNin();
 //getFilterByAnd();
 //getFilterByOr();
-getCountCars();
+//getCountCars();
+getPaginationCars();
 
 async function createCar() {
   const car = new Car({
@@ -113,5 +114,16 @@ async function getCountCars() {
   const cars = await Car
     .find({company: 'AUDI'})
     .count()
+  console.log(cars);
+}
+
+async function getPaginationCars() {
+  const pageNumber = 2
+  const pageSize = 2
+
+  const cars = await Car
+    .find()
+    .skip((pageNumber-1)*pageSize)
+    .limit(pageSize)
   console.log(cars);
 }
