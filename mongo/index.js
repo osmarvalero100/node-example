@@ -15,7 +15,16 @@ mongoose.connect('mongodb://localhost/cars', {useNewUrlParser: true})
 
 const Car = mongoose.model('car', carSchema);
 
-createCar();
+//createCar();
+//getCars();
+//getCompayAndSoldFilterCars();
+//getMoreFilterCar();
+//getFilterPriceCar();
+//getFilterExtrasByIn();
+//getFilterExtrasByNin();
+//getFilterByAnd();
+//getFilterByOr();
+getCountCars();
 
 async function createCar() {
   const car = new Car({
@@ -28,4 +37,81 @@ async function createCar() {
   });
   const result = car.save();
   console.log(result);
+}
+
+async function getCars() {
+  const cars = await Car.find();
+  console.log(cars)
+}
+
+async function getCompayAndSoldFilterCars() {
+  const cars = await Car.find({company: 'BMW', sold: true})
+  console.log(cars);
+  
+}
+
+async function getMoreFilterCar() {
+  const cars = await Car
+    .find({company: 'BMW', sold: false})
+    .sort({price: 1}) // Order by (1) ASC (-1) DESC
+    .limit(2)
+    .select({company: 1, model: 1, price: 1})
+    console.log(cars);
+    
+}
+
+/**
+ * Operadores
+ * $eq = Igual
+ * $ne = Diferente de
+ * $gt = Mayor que
+ * $gte = mayor o igual que
+ * $lt = Menor que
+ * $lte = Menor o igual que
+ * $in = Coincidencia con valores de un Array
+ * $nin = Que no haya coincidencia con valores de un Array
+ * $and = Todas las expresiones deben coincidir
+ * $or = Al menos 1 expresión debe coincidir
+ */
+async function getFilterPriceCar() {
+  const cars = await Car
+    .find({price: {$gt: 2000}})
+  console.log(cars);
+  const cars1 = await Car
+    .find({price: {$gte: 1000, $lt: 5000}})
+  console.log(cars1);
+  
+}
+
+async function getFilterExtrasByIn() {
+  const cars = await Car
+    .find({extras: {$in: 'Automatic'}})
+    console.log(cars);
+}
+
+async function getFilterExtrasByNin() {
+  const cars = await Car
+    .find({extras: {$nin: 'Automatic'}})
+    console.log(cars);
+}
+
+async function getFilterByAnd() {
+  const cars = await Car
+    .find()
+    .and([{company: 'BMW'}, {model: 'X2'}])
+  console.log(cars);
+}
+
+async function getFilterByOr() {
+  const cars = await Car
+    .find()
+    .or([{company: 'BMW'}, {model: 'Z3'}])
+  console.log(cars);
+}
+
+async function getCountCars() {
+  const cars = await Car
+    .find({company: 'AUDI'})
+    .count()
+  console.log(cars);
 }

@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5e8fb90f1a6ada3ec3c1b6b2"},"extras":["4x4"],"company":"BMW","model":"X1","price":1000,"year":2017,"sold":true,"date":{"$date":"2020-04-10T00:08:47.386Z"},"__v":0}
+{"_id":{"$oid":"5e8fb92d3e4f4a3f46fbe355"},"extras":["Automatic"],"company":"BMW","model":"X1","price":1000,"year":2017,"sold":false,"date":{"$date":"2020-04-10T00:09:17.637Z"},"__v":0}
+{"_id":{"$oid":"5e8fb94704ac0e3f6387a8b6"},"extras":["Automatic","4x4"],"company":"BMW","model":"X1","price":1500,"year":2017,"sold":false,"date":{"$date":"2020-04-10T00:09:43.914Z"},"__v":0}
+{"_id":{"$oid":"5e8fb97439f4053fd15b3aff"},"extras":["4x4"],"company":"BMW","model":"X2","price":2000,"year":2017,"sold":false,"date":{"$date":"2020-04-10T00:10:28.193Z"},"__v":0}
+{"_id":{"$oid":"5e8fb98536f8ba404097aea5"},"extras":["Automatic"],"company":"BMW","model":"X3","price":2500,"year":2018,"sold":false,"date":{"$date":"2020-04-10T00:10:45.526Z"},"__v":0}
