@@ -25,7 +25,8 @@ const Car = mongoose.model('car', carSchema);
 //getFilterByAnd();
 //getFilterByOr();
 //getCountCars();
-getPaginationCars();
+//getPaginationCars();
+updateCar('5e8fb90f1a6ada3ec3c1b6b2');
 
 async function createCar() {
   const car = new Car({
@@ -126,4 +127,26 @@ async function getPaginationCars() {
     .skip((pageNumber-1)*pageSize)
     .limit(pageSize)
   console.log(cars);
+}
+
+async function updateCar(id) {
+  /*
+  const car = await Car.findById(id)
+  car.model = 'Mercedes'
+  car.model = 'Calse A'
+  const result = await car.save()
+  console.log(result);
+  */
+ // Otra manera de actualizar
+ const result = await Car.update(
+   {_id: id},
+   {
+     $set: {
+       company: 'Seat',
+       model: 'León'     
+      }
+   }
+ )
+ console.log(result);
+ 
 }
