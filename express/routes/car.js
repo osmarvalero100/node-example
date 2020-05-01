@@ -62,14 +62,14 @@ router.put('/:id', [
   res.status(204).send();
 });
 
-router.delete('/:id', (req, res) => {
-  const coche = coches.find(coche => coche.id === parseInt(req.params.id));
-  if (!coche) {
-    return res.status(400).send(`El coche con id: ${req.params.id} no existe.`);
+router.delete('/:id', async(req, res) => {
+  const car = await Car.findByIdAndDelete(req.params.id);
+  
+  if (!car) {
+    return res.status(404).send(`El coche con id: ${req.params.id} no existe.`);
   }
-  const index = coches.indexOf(coche);
-  coches.splice(index, 1);
-  return res.status(204).send();
+  
+  res.status(200).send('Coche borrado');
 });
 
 module.exports = router;
