@@ -40,19 +40,24 @@ router.post('/', [
 router.put('/:id', [
   check('company').isLength({min: 3}),
   check('model').isLength({min: 3})
-], (req, res) => {
+],async(req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array()});
   }
 
-  const coche = coches.find(coche => coche.id === parseInt(req.params.id));
-  if (!coche) {
-    return res.status(404).send(`El coche con id: ${req.params.id} no existe.`);
+  const car = await Car.findByIdAndUpdate(req.params.id, {
+    company: req.body.company,
+    model: req.body.model,
+    year: req.body.year,
+    sold: req.body.sold,
+    price: req.body.price,
+    extras: req.body.extras
+  })
+  
+  if(!car) {
+    return res.status(404).send('El carro con ID no está');
   }
-  coche.company = req.body.company;
-  coche.model = req.body.model;
-  coche.year = req.body.year;
 
   res.status(204).send();
 });
