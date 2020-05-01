@@ -1,26 +1,19 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const Car = require('../models/car');
 const router = express.Router();
-
 const { check, validationResult } = require('express-validator');
 
-router.get('/list', (req, res) => {
-  res.send(['BMW S1', 'AUDI A3', 'MERCEDES CLASE A']);
+router.get('/', async(req, res) => {
+  const cars = await Car.find();
+  res.send(cars);
 });
-router.get('/:company/:model', (req, res) => {
-  res.send(req.params);
-});
-router.get('', (req, res) => {
-  res.send(coches);
-});
-router.get('/:company', (req, res) => {
-  const coche = coches.find(coche => coche.company.toUpperCase() === req.params.company.toUpperCase());
-  if (!coche) {
-    res.status(404).send('No tenemos ningún coche de esta marca');
-  } else {
-    res.send(coche);
-  }
-});
+
+router.get('/:id', async(req, res) => {
+  const cars = await Car.findById(req.params.id);
+  if (!car) return res.status(404).send('No hemos encontrado un coche con ese ID');
+  res.send(car);
+})
 
 router.post('/', [
   check('company').isLength({min: 3}),

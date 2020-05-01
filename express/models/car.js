@@ -1,3 +1,5 @@
+const mongoose = required('mongoose');
+
 const carSchema = new mongoose.Schema({
   company: {
     type: String,
