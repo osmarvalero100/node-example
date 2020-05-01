@@ -10,28 +10,31 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/:id', async(req, res) => {
-  const cars = await Car.findById(req.params.id);
+  const car = await Car.findById(req.params.id);
   if (!car) return res.status(404).send('No hemos encontrado un coche con ese ID');
   res.send(car);
 })
 
 router.post('/', [
   check('company').isLength({min: 3}),
-  check('model').isLength({min: 3})
-], (req, res) => {
+  check('model').isLength({min: 2})
+], async(req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array()});
   }
-  var cartId = coches.length;
-  var coche = {
-    id: cartId,
+
+  const car = new Car({
     company: req.body.company,
     model: req.body.model,
-    year: req.body.year
-  };
-  coches.push(coche);
-  res.status(201).send(coche);
+    year: req.body.year,
+    sold: req.body.sold,
+    price: req.body.price,
+    extras: req.body.extras
+  });
+
+  const result = await car.save();
+  res.status(201).send(result);
 });
 
 router.put('/:id', [
