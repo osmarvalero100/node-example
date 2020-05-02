@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
 const car = require('./routes/car');
 app.use('/api/cars', car);
 
+// endpoints de User
+const user = require('./routes/user');
+app.use('/api/users', user);
+
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
 
 mongoose.connect('mongodb://localhost/carsdb', {useNewUrlParser: true, useUnifiedTopology: true})
