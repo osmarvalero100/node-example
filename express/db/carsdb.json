@@ -1,7 +1,0 @@
-{"_id":{"$oid":"5eacaad417aab25365508393"},"extras":["Automatic","4*4"],"company":"BMW","model":"Serie1","year":2010,"sold":true,"price":2000,"date":{"$date":"2020-05-01T23:03:48.961Z"},"__v":0}
-{"_id":{"$oid":"5eacab9e89a2c1541c81912d"},"extras":["Automatic","4*4"],"company":"AUDI","model":"A1","year":2010,"sold":true,"price":2000,"date":{"$date":"2020-05-01T23:07:10.685Z"},"__v":0}
-{"_id":{"$oid":"5eacafef5e7dc25483da08ae"},"extras":["Automatic","4*4"],"company":"AUDI","model":"A2","year":2014,"sold":true,"price":2000,"date":{"$date":"2020-05-01T23:25:35.193Z"},"__v":0}
-{"_id":{"$oid":"5eacaffc5e7dc25483da08af"},"extras":["Automatic","4*4"],"company":"AUDI","model":"A3","year":2020,"sold":true,"price":2000,"date":{"$date":"2020-05-01T23:25:48.891Z"},"__v":0}
-{"_id":{"$oid":"5eacb0115e7dc25483da08b0"},"extras":["Automatic","4*4"],"company":"AUDI","model":"A4","year":2020,"sold":true,"price":5000,"date":{"$date":"2020-05-01T23:26:09.302Z"},"__v":0}
-{"_id":{"$oid":"5eacb02b5e7dc25483da08b1"},"extras":["Automatic","4*4"],"company":"BMW","model":"Serie 2","year":2012,"sold":true,"price":5000,"date":{"$date":"2020-05-01T23:26:35.204Z"},"__v":0}
-{"_id":{"$oid":"5eacb03e5e7dc25483da08b2"},"extras":["Automatic","4*4"],"company":"BMW","model":"Serie 3","year":2017,"sold":false,"price":4000,"date":{"$date":"2020-05-01T23:26:54.160Z"},"__v":0}
