@@ -13,14 +13,15 @@ app.get('/', (req, res) => {
 // Se usan los endpoints de car
 const car = require('./routes/car');
 app.use('/api/cars', car);
-
 // endpoints de User
 const user = require('./routes/user');
 app.use('/api/users', user);
-
 // endpoints de User
 const company = require('./routes/company');
 app.use('/api/companies', company);
+// endpoints de Sale
+const sale = require('./routes/sale');
+app.use('/api/sales', sale);
 
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
 
