@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const Company = require("../models/company");
+const {Company} = require("../models/company");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
