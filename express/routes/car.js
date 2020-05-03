@@ -15,9 +15,7 @@ router.get('/:id', async(req, res) => {
   res.send(car);
 })
 
-router.post('/', [
-  check('company').isLength({min: 3}),
-  check('model').isLength({min: 2})
+router.post('/', [check('model').isLength({min: 2})
 ], async(req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -37,9 +35,7 @@ router.post('/', [
   res.status(201).send(result);
 });
 
-router.put('/:id', [
-  check('company').isLength({min: 3}),
-  check('model').isLength({min: 3})
+router.put('/:id', [check('model').isLength({min: 3})
 ],async(req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
