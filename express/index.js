@@ -25,6 +25,6 @@ app.use('/api/sales', sale);
 
 app.listen(port, () => console.log('Escuchando en puerto: '+ port));
 
-mongoose.connect('mongodb://localhost/carsdb', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/carsdb', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
   .then(()=> console.log('Se ha conectado a MongoDb'))
   .catch(error => console.log('Error. No se pudo conectar a MongoDb'))

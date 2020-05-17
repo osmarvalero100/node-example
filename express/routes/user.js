@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
 const express = require("express");
 const User = require("../models/user");
@@ -17,7 +18,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/",
-  [check("name").isLength({ min: 3 }), check("email").isLength({ min: 3 })],
+  [check("name").isLength({ min: 3 }), check("email").isLength({ min: 3 }), check("password").isLength({ min: 3 })],
   async (req, res) => {
     const errors = validationResult(req);
 
@@ -25,14 +26,25 @@ router.post("/",
       return res.status(422).json({ errors: errors.array() });
     }
 
+    let userEmail = await User.findOne({email: req.body.email})
+    if (userEmail) return res.status(400).send('Ya hay un usuario registrado con ese email');
+    
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt)
+
     const user = new User({
       name: req.body.name,
       email: req.body.email,
-      isCustomer: req.body.isCustomer
+      password: hashPassword,
+      isCustomer: false
     });
 
     const result = await user.save();
-    res.status(201).send(result);
+    res.status(201).send({
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    });
   }
 );
 
